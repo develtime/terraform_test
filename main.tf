@@ -20,6 +20,15 @@ data "aws_ami" "ubuntu" {
 
 locals {
   application_type_map = {
+    default = {
+      type  = "t3.micro"
+      ami   = data.aws_ami.ubuntu.id
+      count = 1
+      tag   = "Netology stage"
+      common_instancies = {
+        "t3.micro" = data.aws_ami.ubuntu.id
+      }
+    }
     stage = {
       type  = "t3.micro"
       ami   = data.aws_ami.ubuntu.id
